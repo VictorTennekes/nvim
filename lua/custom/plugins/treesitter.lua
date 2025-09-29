@@ -15,6 +15,7 @@ return { -- Highlight, edit, and navigate code
 			"python",
 			"query",
 			"sql",
+			"hcl",
 			"vim",
 			"vimdoc",
 		},
