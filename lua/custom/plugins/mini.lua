@@ -9,6 +9,12 @@ return { -- Collection of various small independent plugins/modules
 		--  - ci'  - [C]hange [I]nside [']quote
 		require("mini.ai").setup({ n_lines = 500 })
 
+		require("mini.align").setup()
+
+		require("mini.icons").setup()
+
+		require("mini.move").setup()
+
 		-- Add/delete/replace surroundings (brackets, quotes, etc.)
 		--
 		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -30,7 +36,5 @@ return { -- Collection of various small independent plugins/modules
 		statusline.section_location = function()
 			return "%2l:%-2v"
 		end
-
-		require("mini.move").setup()
 	end,
 }
