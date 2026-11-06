@@ -1,12 +1,8 @@
-return {
-	"saghen/blink.cmp",
-	event = "VimEnter",
-	version = "1.*",
-	dependencies = { "folke/lazydev.nvim" },
-	opts = {
-		keymap = { preset = "default" },
-		appearance = { nerd_font_variant = "mono" },
-		completion = { documentation = { auto_show = false } },
+require("later")({ "BufReadPre", "BufNewFile", "InsertEnter" }, {
+	-- A release tag, so the prebuilt fuzzy matcher downloads.
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
+}, function()
+	require("blink.cmp").setup({
 		sources = {
 			default = { "lsp", "path", "snippets", "lazydev" },
 			providers = {
@@ -14,5 +10,5 @@ return {
 			},
 		},
 		signature = { enabled = true },
-	},
-}
+	})
+end)
