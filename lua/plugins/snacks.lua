@@ -75,7 +75,6 @@ return {
 		{ "<leader>gd", p .. "git_diff()<cr>", desc = "Git Diff (Hunks)" },
 		{ "<leader>gf", p .. "git_log_file()<cr>", desc = "Git Log File" },
 		{ "<leader>gB", "<cmd>lua Snacks.gitbrowse()<cr>", desc = "Git Browse", mode = { "n", "v" } },
-		{ "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", desc = "Lazygit" },
 		-- search
 		{ "<leader>sb", p .. "lines()<cr>", desc = "Buffer Lines" },
 		{ "<leader>sB", p .. "grep_buffers()<cr>", desc = "Grep Open Buffers" },

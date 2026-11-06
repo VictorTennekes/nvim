@@ -9,6 +9,7 @@ o.breakindent = true
 o.tabstop = 4
 o.shiftwidth = 4
 o.undofile = true
+o.swapfile = false -- undofile keeps history; swap files only pile up after crashes
 o.ignorecase = true
 o.smartcase = true
 o.signcolumn = "yes"
@@ -25,6 +26,22 @@ o.confirm = true
 vim.schedule(function()
 	o.clipboard = "unnamedplus"
 end)
+-- Over ssh, yank to the local machine's clipboard via OSC 52 (herdr forwards it).
+-- Paste reads the unnamed register: terminals block OSC 52 clipboard reads.
+if vim.env.SSH_TTY then
+	local osc52 = require("vim.ui.clipboard.osc52")
+	local function paste()
+		return { vim.fn.split(vim.fn.getreg('"'), "\n"), vim.fn.getregtype('"') }
+	end
+	vim.g.clipboard = {
+		name = "osc52",
+		copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+		paste = { ["+"] = paste, ["*"] = paste },
+	}
+end
+
+-- lsp.log only grows (44 MB here at WARN): keep errors only.
+vim.lsp.log.set_level(vim.log.levels.ERROR)
 
 for _, k in ipairs({ "h", "j", "k", "l" }) do
 	vim.keymap.set("n", "<C-" .. k .. ">", "<C-w>" .. k, { desc = "Focus window " .. k })
@@ -63,5 +80,4 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = { { import = "plugins" } },
 	install = { colorscheme = { "catppuccin-mocha" } },
-	checker = { enabled = true },
 })
