@@ -114,7 +114,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- buffer lazydev and blink load before lspconfig (blink's plugin file sets the
 -- LSP capabilities before any client starts).
 for _, name in ipairs({
-	"catppuccin",
+	"colorscheme",
 	"snacks",
 	"mini",
 	"treesitter",
